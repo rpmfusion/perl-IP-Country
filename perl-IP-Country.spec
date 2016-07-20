@@ -1,6 +1,6 @@
 Name:           perl-IP-Country
 Version:        2.26
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Fast lookup of country codes from IP addresses
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -9,6 +9,7 @@ Source0:        http://www.cpan.org/modules/by-module/IP/IP-Country-%{version}.t
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(Test)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
@@ -72,6 +73,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jul 20 2016 Leigh Scott <leigh123linux@googlemail.com> - 2.26-8
+- add buildrequires perl-Test
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 2.26-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
