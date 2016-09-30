@@ -1,6 +1,6 @@
 Name:           perl-IP-Country
 Version:        2.26
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Fast lookup of country codes from IP addresses
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -73,6 +73,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Sep 30 2016 Sérgio Basto <sergio@serjux.com> - 2.26-9
+- Rebuild for Perl with locale (buildroot with glibc-all-langpacks)
+
 * Wed Jul 20 2016 Leigh Scott <leigh123linux@googlemail.com> - 2.26-8
 - add buildrequires perl-Test
 
