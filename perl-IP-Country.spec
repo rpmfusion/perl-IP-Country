@@ -1,6 +1,6 @@
 Name:           perl-IP-Country
 Version:        2.26
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Fast lookup of country codes from IP addresses
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -8,6 +8,7 @@ URL:            http://search.cpan.org/dist/IP-Country/
 Source0:        http://www.cpan.org/modules/by-module/IP/IP-Country-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+BuildRequires:  perl-generators
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Test)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
@@ -73,6 +74,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 01 2016 Sérgio Basto <sergio@serjux.com> - 2.26-10
+- Add perl-generators to get proper requires/provides on F-25 and later
+
 * Fri Sep 30 2016 Sérgio Basto <sergio@serjux.com> - 2.26-9
 - Rebuild for Perl with locale (buildroot with glibc-all-langpacks)
 
