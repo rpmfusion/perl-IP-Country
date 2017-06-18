@@ -1,6 +1,6 @@
 Name:           perl-IP-Country
-Version:        2.26
-Release:        12%{?dist}
+Version:        2.28
+Release:        1%{?dist}
 Summary:        Fast lookup of country codes from IP addresses
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -74,6 +74,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Jun 18 2017 Sérgio Basto <sergio@serjux.com> - 2.28-1
+- Update to IP-Country-2.28
+
 * Sun Jun 18 2017 Paul Howarth <paul@city-fan.org> - 2.26-12
 - Perl 5.26 rebuild
 
