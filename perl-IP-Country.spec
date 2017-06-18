@@ -1,6 +1,6 @@
 Name:           perl-IP-Country
 Version:        2.26
-Release:        11%{?dist}
+Release:        12%{?dist}
 Summary:        Fast lookup of country codes from IP addresses
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -74,6 +74,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Jun 18 2017 Paul Howarth <paul@city-fan.org> - 2.26-12
+- Perl 5.26 rebuild
+
 * Sun Mar 26 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 2.26-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
