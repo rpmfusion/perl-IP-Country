@@ -1,16 +1,30 @@
 Name:           perl-IP-Country
 Version:        2.28
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Fast lookup of country codes from IP addresses
 License:        GPL+ or Artistic
-Group:          Development/Libraries
-URL:            http://search.cpan.org/dist/IP-Country/
-Source0:        http://www.cpan.org/modules/by-module/IP/IP-Country-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+URL:            https://metacpan.org/release/IP-Country
+Source0:        https://cpan.metacpan.org/modules/by-module/IP/IP-Country-%{version}.tar.gz
 BuildArch:      noarch
+# Build
+BuildRequires:  coreutils
+BuildRequires:  findutils
+BuildRequires:  make
 BuildRequires:  perl-generators
+BuildRequires:  perl-interpreter
 BuildRequires:  perl(ExtUtils::MakeMaker)
+# Module
+BuildRequires:  perl(Carp)
+BuildRequires:  perl(Exporter)
+BuildRequires:  perl(Socket)
+BuildRequires:  perl(strict)
+BuildRequires:  perl(vars)
+BuildRequires:  perl(warnings)
+# Utils
+BuildRequires:  perl(Geography::Countries)
+# Test Suite
 BuildRequires:  perl(Test)
+# Dependencies
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
@@ -24,11 +38,10 @@ accurate as reverse-DNS and WHOIS lookup.
 
 %package utils
 Summary:        Utility to query and rebuild the IP::Country database
-Group:          Applications/Internet
 Requires:       %{name} = %{version}-%{release}
 
 %description utils
-ip2cc is a frontend to the IP::Country Perl module allowing fast lookups of
+ip2cc is a front-end to the IP::Country Perl module allowing fast lookups of
 IP addresses and their corresponding countries based on available regional
 NIC data.
 
@@ -37,7 +50,6 @@ the RIPE/APNIC/ARIN et al data.
 
 %prep
 %setup -q -n IP-Country-%{version}
-find -name '._*' | xargs rm -f
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -45,35 +57,46 @@ make %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot}
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
-find %{buildroot} -type f -name .packlist -exec rm -f {} \;
-find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null \;
-%{_fixperms} %{buildroot}/*
+make pure_install DESTDIR=%{buildroot}
+find %{buildroot} -type f -name .packlist -delete
+%{_fixperms} -c %{buildroot}
 
 
 %check
 make test
 
 
-%clean
-rm -rf %{buildroot}
-
-
 %files
-%defattr(-,root,root,-)
 %doc CHANGES README
-%{perl_vendorlib}/*
-%{_mandir}/man3/*
+%{perl_vendorlib}/IP/
+%{_mandir}/man3/IP::Authority.3*
+%{_mandir}/man3/IP::Country.3*
+%{_mandir}/man3/IP::Country::Fast.3*
+%{_mandir}/man3/IP::Country::MaxMind.3*
+%{_mandir}/man3/IP::Country::Medium.3*
+%{_mandir}/man3/IP::Country::Slow.3*
 
 %files utils
-%defattr(-,root,root,-)
 %doc dbmScripts INSTALL
 %{_bindir}/ip2cc
 %{_mandir}/man1/ip2cc.1*
 
 
 %changelog
+* Wed Jul  1 2020 Paul Howarth <paul@city-fan.org> - 2.28-9
+- Spec clean-up
+  - Drop legacy Group: and BuildRoot: tags
+  - Switch upstream from search.cpan.org to metacpan.org
+  - Be verbose when removing files and fixing permissions
+  - Use DESTDIR rather than PERL_INSTALL_ROOT
+  - Simplify find command using -delete
+  - Don't need to remove empty directories from the buildroot
+  - Drop redundant file deletion in %%prep section
+  - Drop redundant buildroot cleaning in %%install section
+  - Drop redundant %%clean section
+  - Drop redundant %%defattr from %%files lists
+  - Make %%files list more explicit
+
 * Wed Feb 05 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.28-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
