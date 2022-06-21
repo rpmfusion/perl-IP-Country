@@ -1,6 +1,3 @@
-# These are not spelling errors
-addFilter("spelling-error %description -l en_US (et|al|ipcc|lookups) -> ")
-
 # BUILDING YOUR OWN DATABASE section is of value to users
 addFilter("install-file-in-docs /usr/share/doc/perl-IP-Country-utils.*/INSTALL")
 
