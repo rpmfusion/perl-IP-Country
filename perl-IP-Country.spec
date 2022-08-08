@@ -1,6 +1,6 @@
 Name:           perl-IP-Country
 Version:        2.28
-Release:        15%{?dist}
+Release:        16%{?dist}
 Summary:        Fast lookup of country codes from IP addresses
 License:        GPL+ or Artistic
 URL:            https://metacpan.org/release/IP-Country
@@ -83,6 +83,10 @@ make test
 
 
 %changelog
+* Mon Aug 08 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.28-16
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
+  5.1
+
 * Tue Jun 21 2022 Paul Howarth <paul@city-fan.org> - 2.28-15
 - Perl 5.36 rebuild
 
